@@ -93,7 +93,7 @@ class AmbiguityDataset(Dataset):
         }
 
 
-def compute_metrics(self, eval_pred):
+def compute_metrics(eval_pred):
     """Compute evaluation metrics for Trainer."""
     predictions, labels = eval_pred
     predictions = np.argmax(predictions, axis=1)
