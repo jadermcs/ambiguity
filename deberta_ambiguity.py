@@ -1,9 +1,9 @@
 import os
 import random
-import pandas as pd
 import numpy as np
 import torch
 from torch.utils.data import Dataset
+from datasets import load_dataset
 from transformers import (
     AutoTokenizer,
     AutoModelForSequenceClassification,
@@ -242,22 +242,15 @@ def main(experiment_type: str = "deberta", **custom_params):
         data_seed=42,
     )
     # Prepare data
-    data = pd.read_csv("experiment_1_data.csv")[
-        ["underspecified sentence", "control sentence"]
-    ].rename(columns={"underspecified sentence": "T", "control sentence": "F"})
-    val_data = data.sample(frac=0.2, random_state=42)
-    train_data = data.drop(val_data.index)
-    val_data = prepare_data(val_data)
-    train_data = prepare_data(train_data)
+    train_data = load_dataset("json", data_files="data/amb.train.json", split="train")
+    val_data = load_dataset("json", data_files="data/amb.val.json", split="train")
+    test_data = load_dataset("json", data_files="data/amb.test.json", split="train")
     train_dataset = AmbiguityDataset(
-        train_data["sentence"].values, train_data["labels"].values, tokenizer
+        train_data["sentence"], train_data["labels"], tokenizer
     )
-    val_dataset = AmbiguityDataset(
-        val_data["sentence"].values, val_data["labels"].values, tokenizer
-    )
-    data = pd.read_csv("ambiguous.txt", sep=";")
+    val_dataset = AmbiguityDataset(val_data["sentence"], val_data["labels"], tokenizer)
     test_dataset = AmbiguityDataset(
-        data["sentence"].values, data["labels"].values, tokenizer
+        test_data["sentence"], test_data["labels"], tokenizer
     )
 
     trainer = Trainer(

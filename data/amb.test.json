@@ -1,0 +1,232 @@
+[
+  {
+    "sentence": "He saw that bat.",
+    "labels": 1,
+    "description": "Lexical ambiguity (animal vs. sports equipment)"
+  },
+  {
+    "sentence": "The coach hired the player with the most experience.",
+    "labels": 1,
+    "description": "Lexical ambiguity (coach vs. player)"
+  },
+  {
+    "sentence": "The cat sat on the mat.",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The sun rises in the east.",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "It was a narrow defeat.",
+    "labels": 1,
+    "description": null
+  },
+  {
+    "sentence": "I saw the man with the telescope",
+    "labels": 1,
+    "description": "PP attachment"
+  },
+  {
+    "sentence": "The visiting relatives can be boring",
+    "labels": 1,
+    "description": "Gerund\/present participle"
+  },
+  {
+    "sentence": "He saw that bat",
+    "labels": 1,
+    "description": "Lexical ambiguity (animal vs. sports equipment)"
+  },
+  {
+    "sentence": "The man on the hill with a telescope saw a boy",
+    "labels": 1,
+    "description": "Multiple PP attachment"
+  },
+  {
+    "sentence": "The horse raced past the barn fell",
+    "labels": 1,
+    "description": "Garden path sentence"
+  },
+  {
+    "sentence": "Flying planes can be dangerous",
+    "labels": 1,
+    "description": "Gerund vs. present participle"
+  },
+  {
+    "sentence": "The chicken is ready to eat",
+    "labels": 1,
+    "description": "Infinitive clause ambiguity"
+  },
+  {
+    "sentence": "Time flies like an arrow",
+    "labels": 1,
+    "description": "Multiple syntactic parses"
+  },
+  {
+    "sentence": "They are hunting dogs",
+    "labels": 1,
+    "description": "Compound noun vs. progressive"
+  },
+  {
+    "sentence": "I saw her duck",
+    "labels": 1,
+    "description": "Verb vs. noun ambiguity"
+  },
+  {
+    "sentence": "The professor talked to the student with the book",
+    "labels": 1,
+    "description": "PP attachment"
+  },
+  {
+    "sentence": "Mary hit the man with the stick",
+    "labels": 1,
+    "description": "Instrument vs. modifier"
+  },
+  {
+    "sentence": "We need more intelligent students",
+    "labels": 1,
+    "description": "Scope ambiguity"
+  },
+  {
+    "sentence": "Every man loves a woman",
+    "labels": 1,
+    "description": "Quantifier scope"
+  },
+  {
+    "sentence": "The shooting of the hunters was terrible",
+    "labels": 1,
+    "description": "Subjective\/objective genitive"
+  },
+  {
+    "sentence": "The duck is ready to eat",
+    "labels": 1,
+    "description": "Subject\/object ambiguity"
+  },
+  {
+    "sentence": "I watched the man with binoculars",
+    "labels": 1,
+    "description": "PP attachment"
+  },
+  {
+    "sentence": "The cleaning lady was late",
+    "labels": 1,
+    "description": "Gerund vs. adjective"
+  },
+  {
+    "sentence": "Visiting relatives can be exhausting",
+    "labels": 1,
+    "description": "Gerund vs. present participle"
+  },
+  {
+    "sentence": "The old man the boat",
+    "labels": 1,
+    "description": "Garden path sentence"
+  },
+  {
+    "sentence": "The cat sat on the mat",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "My dog eats food from a bowl",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The sun rises in the east",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "She reads a new book every week",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The clear blue sky is beautiful",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "John went to the store yesterday",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The children played in the park",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Coffee tastes bitter without sugar",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Rain falls from the clouds",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Birds fly south in winter",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The teacher explained the lesson clearly",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Students study hard for exams",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Fresh flowers smell wonderful",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Cars drive on roads",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "People walk with their feet",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Mathematics is a difficult subject",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "The library closes at nine o'clock",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Pizza is my favorite food",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Exercise improves your health",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Technology advances very quickly",
+    "labels": 0,
+    "description": null
+  },
+  {
+    "sentence": "Pizza is my favorite food",
+    "labels": 0,
+    "description": null
+  }
+]
