@@ -1,0 +1,47 @@
+sentence;labels;description
+He saw that bat.;1;
+The coach hired the player with the most experience.;1;
+The cat sat on the mat.;0;
+The sun rises in the east.;0;
+It was a narrow defeat.;1;
+I saw the man with the telescope;1;PP attachment
+The visiting relatives can be boring;1;Gerund/present participle
+He saw that bat;1;Lexical ambiguity (animal vs. sports equipment)
+The man on the hill with a telescope saw a boy;1;Multiple PP attachment
+The horse raced past the barn fell;1;Garden path sentence
+Flying planes can be dangerous;1;Gerund vs. present participle
+The chicken is ready to eat;1;Infinitive clause ambiguity
+Time flies like an arrow;1;Multiple syntactic parses
+They are hunting dogs;1;Compound noun vs. progressive
+I saw her duck;1;Verb vs. noun ambiguity
+The professor talked to the student with the book;1;PP attachment
+Mary hit the man with the stick;1;Instrument vs. modifier
+We need more intelligent students;1;Scope ambiguity
+Every man loves a woman;1;Quantifier scope
+The shooting of the hunters was terrible;1;Subjective/objective genitive
+The duck is ready to eat;1;Subject/object ambiguity
+I watched the man with binoculars;1;PP attachment
+The cleaning lady was late;1;Gerund vs. adjective
+Visiting relatives can be exhausting;1;Gerund vs. present participle
+The old man the boat;1;Garden path sentence
+The cat sat on the mat;0;
+My dog eats food from a bowl;0;
+The sun rises in the east;0;
+She reads a new book every week;0;
+The clear blue sky is beautiful;0;
+John went to the store yesterday;0;
+The children played in the park;0;
+Coffee tastes bitter without sugar;0;
+Rain falls from the clouds;0;
+Birds fly south in winter;0;
+The teacher explained the lesson clearly;0;
+Students study hard for exams;0;
+Fresh flowers smell wonderful;0;
+Cars drive on roads;0;
+People walk with their feet;0;
+Mathematics is a difficult subject;0;
+The library closes at nine o'clock;0;
+Pizza is my favorite food;0;
+Exercise improves your health;0;
+Technology advances very quickly;0;
+Pizza is my favorite food;0;

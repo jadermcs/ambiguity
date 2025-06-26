@@ -1,0 +1,12 @@
+spacy
+deap
+numpy
+torch>=1.9.0
+transformers>=4.21.0
+datasets>=2.0.0
+scikit-learn>=1.0.0
+accelerate>=0.20.0
+evaluate>=0.4.0
+seqeval>=1.2.0
+protobuf
+sentencepiece
