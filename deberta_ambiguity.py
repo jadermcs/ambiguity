@@ -234,16 +234,12 @@ def main(experiment_type: str = "deberta", **custom_params):
     train_data = load_dataset(
         "json", data_files="data/amb.train.json", split="train"
     ).shuffle(seed=42)
-    val_data = load_dataset(
-        "json", data_files="data/amb.val.json", split="train"
-    ).shuffle(seed=42)
     test_data = load_dataset(
         "json", data_files="data/amb.test.json", split="train"
     ).shuffle(seed=42)
     train_dataset = AmbiguityDataset(
         train_data["sentence"], train_data["labels"], tokenizer
     )
-    val_dataset = AmbiguityDataset(val_data["sentence"], val_data["labels"], tokenizer)
     test_dataset = AmbiguityDataset(
         test_data["sentence"], test_data["labels"], tokenizer
     )
@@ -252,7 +248,7 @@ def main(experiment_type: str = "deberta", **custom_params):
         model=model,
         args=training_args,
         train_dataset=train_dataset,
-        eval_dataset=val_dataset,
+        eval_dataset=test_dataset,
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
