@@ -1,5 +1,80 @@
 [
   {
+    "sentence": "It was a cold reception.",
+    "labels": 1,
+    "description": "Ambiguous whether 'cold' refers to literal temperature or figurative unfriendliness."
+  },
+  {
+    "sentence": "That was a hard landing.",
+    "labels": 1,
+    "description": "Unclear if 'hard' refers to physical impact or a difficult metaphorical situation."
+  },
+  {
+    "sentence": "It was a smooth operation.",
+    "labels": 1,
+    "description": "Could refer to a medical procedure going well or a task (like a heist or project) proceeding without issues."
+  },
+  {
+    "sentence": "It was a close call.",
+    "labels": 1,
+    "description": "Unclear whether it's about a near accident/literal danger or a narrowly avoided metaphorical mistake."
+  },
+  {
+    "sentence": "It was a rough night.",
+    "labels": 1,
+    "description": "Could mean physically uncomfortable (weather, sleeping conditions) or emotionally/mentally challenging."
+  },
+  {
+    "sentence": "It was a heavy loss.",
+    "labels": 1,
+    "description": "Ambiguous between a literal physical loss (e.g., weight/money) or an emotionally significant defeat."
+  },
+  {
+    "sentence": "That was a deep cut.",
+    "labels": 1,
+    "description": "Could mean a literal physical injury or an emotionally hurtful remark."
+  },
+  {
+    "sentence": "It was a sharp turn.",
+    "labels": 1,
+    "description": "Could refer to a literal road curve or a sudden change in events or tone."
+  },
+  {
+    "sentence": "It was a clean break.",
+    "labels": 1,
+    "description": "Could refer to a bone fracture or the end of a relationship/job without lingering issues."
+  },
+  {
+    "sentence": "That was a light touch.",
+    "labels": 1,
+    "description": "Ambiguous between physical gentleness or a subtle metaphorical approach (e.g., in negotiations)."
+  },
+  {
+    "sentence": "It was a long journey.",
+    "labels": 1,
+    "description": "Unclear whether it's a literal trip or a metaphor for personal or emotional development."
+  },
+  {
+    "sentence": "It was a dry run.",
+    "labels": 1,
+    "description": "Could refer to a rehearsal or practice, but 'dry' might imply literal conditions as well."
+  },
+  {
+    "sentence": "That was a flat performance.",
+    "labels": 1,
+    "description": "Could refer to literal tone/pitch in music or a figurative lack of energy or emotion."
+  },
+  {
+    "sentence": "It was a big hit.",
+    "labels": 1,
+    "description": "Ambiguous whether referring to success (figurative) or a literal impact (physical strike)."
+  },
+  {
+    "sentence": "It was a soft landing.",
+    "labels": 1,
+    "description": "Could mean an actual gentle descent or a mild downturn in markets/business outcomes."
+  },
+  {
     "sentence": "Alice tried frantically to stop her son from barking at the party, leaving us to wonder why he was behaving so strangely.",
     "labels": 0,
     "description": null

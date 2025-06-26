@@ -148,6 +148,7 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
 
     # Per-sentence analysis
     logger.info("\nPer-sentence Analysis:")
+    logger.info("[ACTUAL] -> PREDICTED (confidence)")
     correct_predictions = 0
 
     for i, (sentence, true_label, pred, conf) in enumerate(
@@ -191,23 +192,11 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
         logger.warning(f"Could not generate classification report: {e}")
 
 
-# Set random seeds for reproducibility
-torch.manual_seed(42)
-np.random.seed(42)
-random.seed(42)
-
-
-def prepare_data(df):
-    df_stacked = pd.concat(
-        [
-            df["T"].to_frame().assign(labels=1).rename(columns={"T": "sentence"}),
-            df["F"].to_frame().assign(labels=0).rename(columns={"F": "sentence"}),
-        ]
-    )
-    return df_stacked
-
-
 def main(experiment_type: str = "deberta", **custom_params):
+    # Set random seeds for reproducibility
+    torch.manual_seed(42)
+    np.random.seed(42)
+    random.seed(42)
     config = TrainingConfig(experiment_type)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -242,9 +231,15 @@ def main(experiment_type: str = "deberta", **custom_params):
         data_seed=42,
     )
     # Prepare data
-    train_data = load_dataset("json", data_files="data/amb.train.json", split="train")
-    val_data = load_dataset("json", data_files="data/amb.val.json", split="train")
-    test_data = load_dataset("json", data_files="data/amb.test.json", split="train")
+    train_data = load_dataset(
+        "json", data_files="data/amb.train.json", split="train"
+    ).shuffle(seed=42)
+    val_data = load_dataset(
+        "json", data_files="data/amb.val.json", split="train"
+    ).shuffle(seed=42)
+    test_data = load_dataset(
+        "json", data_files="data/amb.test.json", split="train"
+    ).shuffle(seed=42)
     train_dataset = AmbiguityDataset(
         train_data["sentence"], train_data["labels"], tokenizer
     )
@@ -293,14 +288,14 @@ def main(experiment_type: str = "deberta", **custom_params):
     ]
 
     for sentence in example_sentences:
-        sentence = tokenizer(
+        sentence_encoded = tokenizer(
             sentence,
             max_length=config.max_length,
             padding="max_length",
             truncation=True,
             return_tensors="pt",
         )
-        pred, conf = predict(model, sentence)
+        pred, conf = predict(model, sentence_encoded)
         pred_label = "AMBIGUOUS" if pred else "CLEAR"
         logger.info(f"{pred_label} (conf: {conf:.3f}): '{sentence}'")
 
