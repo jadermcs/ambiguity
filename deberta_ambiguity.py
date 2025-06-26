@@ -53,9 +53,9 @@ class TrainingConfig:
         self.max_length = 128
         self.early_stopping_patience = 3
         if self.experiment_type == "deberta":
-            self.model_name = "microsoft/deberta-v3-small"
+            self.model_name = "microsoft/deberta-v3-large"
         elif self.experiment_type == "modernbert":
-            self.model_name = "answerdotai/ModernBERT-small"
+            self.model_name = "answerdotai/ModernBERT-large"
 
 
 class AmbiguityDataset(Dataset):
@@ -181,7 +181,8 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
                 else [f"Class_{i}" for i in unique_labels]
             )
             logger.info(
-                classification_report(
+                "\n"
+                + classification_report(
                     test_labels,
                     predictions,
                     target_names=target_names,
