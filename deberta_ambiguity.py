@@ -19,7 +19,6 @@ from sklearn.metrics import (
     accuracy_score,
     classification_report,
 )
-from sklearn.model_selection import train_test_split
 from typing import Dict, List, Tuple
 import logging
 import warnings
@@ -133,8 +132,8 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
     logger.info("\n" + "=" * 60)
     logger.info("DETAILED EVALUATION")
     logger.info("=" * 60)
-    test_sentences = test_data["sentences"]
-    test_labels = test_data["labels"]
+    test_sentences = test_data.sentences
+    test_labels = test_data.labels
 
     # Get predictions for each test sentence
     predictions = []
