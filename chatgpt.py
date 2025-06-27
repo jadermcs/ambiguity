@@ -1,4 +1,5 @@
 from openai import OpenAI
+from argparse import ArgumentParser
 import pandas as pd
 import os
 
@@ -57,34 +58,49 @@ data = pd.concat(
     ignore_index=True,
 )
 
-try:
-    for i, row in data.iterrows():
-        print("Processing example", i)
-        messages = model_inputs + [
-            {
-                "role": "user",
-                "content": f"Word: {row['lemma']}\nUsage: {row['usage']}",
-            },
-        ]
 
-        response = (
-            client.chat.completions.create(model="gpt-4o-mini", messages=messages)
-            .choices[0]
-            .message.content
-        )
+def main():
+    parser = ArgumentParser()
+    parser.add_argument(
+        "--output", type=str, default="data/wic_chatgpt_annotation.train.jsonl"
+    )
+    parser.add_argument("--start_index", type=int, default=0)
+    args = parser.parse_args()
 
-        desc, answer = response.split("\n")
-        desc = desc.replace("Reasoning: ", "")
-        answer = answer.replace("Answer: ", "")
+    try:
+        for i, row in data.iloc[args.start_index :].iterrows():
+            print("Processing example", i)
+            messages = model_inputs + [
+                {
+                    "role": "user",
+                    "content": f"Word: {row['lemma']}\nUsage: {row['usage']}",
+                },
+            ]
 
-        data.loc[i, "answer"] = answer
-        data.loc[i, "description"] = desc
+            response = (
+                client.chat.completions.create(model="gpt-4o-mini", messages=messages)
+                .choices[0]
+                .message.content
+            )
 
-        print("Word: ", row["lemma"])
-        print("Usage: ", row["usage"])
-        print("Reasoning: ", desc)
-        print("Answer: ", answer)
-except KeyboardInterrupt:
-    print("interrupted")
+            desc, answer = response.split("\n")
+            desc = desc.replace("Reasoning: ", "")
+            answer = answer.replace("Answer: ", "")
 
-data.dropna().to_json("data/wic_chatgpt_annotation.json", orient="records", indent=2)
+            data.loc[i, "answer"] = answer
+            data.loc[i, "description"] = desc
+
+            print("Word: ", row["lemma"])
+            print("Usage: ", row["usage"])
+            print("Reasoning: ", desc)
+            print("Answer: ", answer)
+
+    except KeyboardInterrupt:
+        print("interrupted")
+
+    # append new data to existing file
+    data.dropna().to_json(args.output, orient="records", lines=True, mode="a")
+
+
+if __name__ == "__main__":
+    main()
