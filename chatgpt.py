@@ -57,6 +57,7 @@ data = pd.concat(
     ],
     ignore_index=True,
 )
+data = data.reset_index()
 
 
 def main():
@@ -64,11 +65,19 @@ def main():
     parser.add_argument(
         "--output", type=str, default="data/wic_chatgpt_annotation.train.jsonl"
     )
-    parser.add_argument("--start_index", type=int, default=0)
+    parser.add_argument("--start_index", type=str, default="0")
     args = parser.parse_args()
 
+    skipped = []
+
     try:
-        for i, row in data.iloc[args.start_index :].iterrows():
+        start_index = args.start_index.split(",")
+        if len(start_index) == 1:
+            iterator = data.iloc[int(start_index[0]) :]
+        else:
+            start_index = [int(i) for i in start_index]
+            iterator = data.iloc[start_index]
+        for i, row in iterator.iterrows():
             print("Processing example", i)
             messages = model_inputs + [
                 {
@@ -83,23 +92,37 @@ def main():
                 .message.content
             )
 
-            desc, answer = response.split("\n")
-            desc = desc.replace("Reasoning: ", "")
-            answer = answer.replace("Answer: ", "")
+            try:
+                desc, answer = response.split("\n")
+                desc = desc.replace("Reasoning: ", "")
+                answer = answer.replace("Answer: ", "")
 
-            data.loc[i, "answer"] = answer
-            data.loc[i, "description"] = desc
+                data.loc[i, "answer"] = answer
+                data.loc[i, "description"] = desc
 
-            print("Word: ", row["lemma"])
-            print("Usage: ", row["usage"])
-            print("Reasoning: ", desc)
-            print("Answer: ", answer)
+                print("Word: ", row["lemma"])
+                print("Usage: ", row["usage"])
+                print("Reasoning: ", desc)
+                print("Answer: ", answer)
+                example = pd.DataFrame(
+                    {
+                        "lemma": row["lemma"],
+                        "usage": row["usage"],
+                        "description": desc,
+                        "answer": answer,
+                    },
+                    index=[i],
+                ).reset_index()
+                example.to_json(args.output, orient="records", lines=True, mode="a")
+            except ValueError as e:
+                print(e)
+                print("Invalid response format, skipping example", i)
+                skipped.append(i)
 
     except KeyboardInterrupt:
         print("interrupted")
-
     # append new data to existing file
-    data.dropna().to_json(args.output, orient="records", lines=True, mode="a")
+    print("Skipped examples:", skipped)
 
 
 if __name__ == "__main__":
