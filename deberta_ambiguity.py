@@ -51,7 +51,7 @@ class TrainingConfig:
         self.warmup_ratio = 0.1
         self.weight_decay = 0.01
         self.max_length = 128
-        self.early_stopping_patience = 3
+        self.early_stopping_patience = 5
         if self.experiment_type == "deberta":
             self.model_name = "microsoft/deberta-v3-large"
         elif self.experiment_type == "modernbert":
