@@ -193,6 +193,18 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
         logger.warning(f"Could not generate classification report: {e}")
 
 
+def tokenize(example, tokenizer):
+    output = tokenizer(
+        example["lemma"],
+        example["usage"],
+        truncation=True,
+        padding=True,
+        max_length=128,
+    )
+    output["labels"] = int(example["answer"] == "ambiguous")
+    return output
+
+
 def main(experiment_type: str = "deberta", **custom_params):
     # Set random seeds for reproducibility
     torch.manual_seed(42)
@@ -232,24 +244,35 @@ def main(experiment_type: str = "deberta", **custom_params):
         data_seed=42,
     )
     # Prepare data
-    train_data = load_dataset(
-        "json", data_files="data/amb.train.json", split="train"
-    ).shuffle(seed=42)
-    test_data = load_dataset(
-        "json", data_files="data/amb.test.json", split="train"
-    ).shuffle(seed=42)
-    train_dataset = AmbiguityDataset(
-        train_data["sentence"], train_data["labels"], tokenizer
+    # train_data = load_dataset(
+    #     "json", data_files="data/amb.train.json", split="train"
+    # ).shuffle(seed=42)
+    # test_data = load_dataset(
+    #     "json", data_files="data/amb.test.json", split="train"
+    # ).shuffle(seed=42)
+    # train_dataset = AmbiguityDataset(
+    #     train_data["sentence"], train_data["labels"], tokenizer
+    # )
+    # test_dataset = AmbiguityDataset(
+    #     test_data["sentence"], test_data["labels"], tokenizer
+    # )
+    #
+    data = (
+        load_dataset(
+            "json", data_files="data/wic_chatgpt_annotation.train.jsonl", split="train"
+        )
+        .train_test_split(test_size=0.2, seed=42)
+        .map(lambda x: tokenize(x, tokenizer))
     )
-    test_dataset = AmbiguityDataset(
-        test_data["sentence"], test_data["labels"], tokenizer
-    )
+    print(data)
+    print(data["train"])
+    print(data["train"][0])
 
     trainer = Trainer(
         model=model,
         args=training_args,
-        train_dataset=train_dataset,
-        eval_dataset=test_dataset,
+        train_dataset=data["train"],
+        eval_dataset=data["test"],
         tokenizer=tokenizer,
         data_collator=data_collator,
         compute_metrics=compute_metrics,
