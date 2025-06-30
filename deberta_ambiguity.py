@@ -1,5 +1,6 @@
 import os
 import random
+import argparse
 import numpy as np
 import torch
 from torch.utils.data import Dataset
@@ -207,12 +208,15 @@ def tokenize(example, tokenizer):
     return output
 
 
-def main(experiment_type: str = "deberta", **custom_params):
+def main(raw_args=None):
     # Set random seeds for reproducibility
-    torch.manual_seed(42)
+    args = argparse.ArgumentParser(raw_args)
+    args.add_argument("--model", type=str, default="deberta")
+    args = args.parse_args()
+    torch.manual_seed(args.seed)
     np.random.seed(42)
     random.seed(42)
-    config = TrainingConfig(experiment_type)
+    config = TrainingConfig(args.model)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     logger.info(f"Using device: {device}")
