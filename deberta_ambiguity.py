@@ -140,8 +140,10 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
     confidences = []
     device = model.device
 
-    for sentence in test_sentences:
-        sentence = tokenizer(sentence, return_tensors="pt").to(device)
+    for example in test_sentences:
+        word = example["lemma"]
+        sentence = example["usage"]
+        sentence = tokenizer(word, sentence, return_tensors="pt").to(device)
         pred, conf = predict(model, sentence)
         predictions.append(pred)
         confidences.append(conf)
@@ -284,12 +286,12 @@ def main(experiment_type: str = "deberta", **custom_params):
     )
 
     trainer.train()
-    metrics = trainer.evaluate(test_dataset)
+    metrics = trainer.evaluate(data["test"])
     for k, v in metrics.items():
         print(f"{k}: {v:.3f}")
 
     # Detailed evaluation
-    detailed_evaluation(model, tokenizer, test_dataset)
+    detailed_evaluation(model, tokenizer, data["test"])
 
     # Save model using trainer
     trainer.save_model(f"{output_dir}/best_model")
@@ -299,25 +301,6 @@ def main(experiment_type: str = "deberta", **custom_params):
     logger.info("\n" + "=" * 60)
     logger.info("EXAMPLE PREDICTIONS")
     logger.info("=" * 60)
-
-    example_sentences = [
-        "I saw the man with the telescope",
-        "The cat sat on the mat",
-        "Flying planes can be dangerous",
-        "She reads books every day",
-    ]
-
-    for sentence in example_sentences:
-        sentence_encoded = tokenizer(
-            sentence,
-            max_length=config.max_length,
-            padding="max_length",
-            truncation=True,
-            return_tensors="pt",
-        )
-        pred, conf = predict(model, sentence_encoded)
-        pred_label = "AMBIGUOUS" if pred else "CLEAR"
-        logger.info(f"{pred_label} (conf: {conf:.3f}): '{sentence}'")
 
 
 if __name__ == "__main__":
