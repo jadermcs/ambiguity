@@ -141,7 +141,7 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
     confidences = []
     device = model.device
 
-    for example in test_sentences:
+    for example in test_data:
         word = example["lemma"]
         sentence = example["usage"]
         sentence = tokenizer(word, sentence, return_tensors="pt").to(device)
