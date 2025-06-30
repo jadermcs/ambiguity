@@ -133,7 +133,7 @@ def detailed_evaluation(model, tokenizer, test_data) -> Dict:
     logger.info("DETAILED EVALUATION")
     logger.info("=" * 60)
     test_sentences = test_data["usage"]
-    test_labels = test_data.labels
+    test_labels = test_data["labels"]
 
     # Get predictions for each test sentence
     predictions = []
