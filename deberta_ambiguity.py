@@ -212,10 +212,11 @@ def main(raw_args=None):
     # Set random seeds for reproducibility
     args = argparse.ArgumentParser(raw_args)
     args.add_argument("--model", type=str, default="deberta")
+    args.add_argument("--seed", type=int, default=42)
     args = args.parse_args()
     torch.manual_seed(args.seed)
-    np.random.seed(42)
-    random.seed(42)
+    np.random.seed(args.seed)
+    random.seed(args.seed)
     config = TrainingConfig(args.model)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
