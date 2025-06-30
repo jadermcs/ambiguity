@@ -229,7 +229,7 @@ def main(raw_args=None):
     # Data collator for dynamic padding
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 
-    output_dir = f"results_{experiment_type}"
+    output_dir = f"results_{args.model}"
     os.makedirs(output_dir, exist_ok=True)
 
     training_args = TrainingArguments(
